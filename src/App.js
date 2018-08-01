@@ -57,8 +57,9 @@ class App extends Component {
     // Checks who won after a player has made 3 selections
     if (this.state[currentPlayer].board.length >= 2) {
       let isWon = checkIfWon(currentPlayer, playerBoard);
-      let winner = isWon ? currentPlayer : '';
 
+      // Updates which player won by name
+      let winner = isWon ? this.state[currentPlayer].name : '';
       this.setState({ winner });
     }
   }
@@ -76,6 +77,7 @@ class App extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
+    // TODO Clear input fields
   }
 
   render() {
@@ -86,7 +88,7 @@ class App extends Component {
           player2={this.state.player2}
           handleInputChange={this.handleInputChange} 
           handleFormSubmit={this.handleFormSubmit} />
-        <Winner />
+        {this.state.winner ? <Winner winner={this.state.winner} /> : ''}
         <Board 
           className="board" 
           handleSelected={this.handleSelected} 
