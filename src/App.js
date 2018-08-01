@@ -13,48 +13,92 @@ class App extends Component {
       },
       player2: {
         name2: 'Player 2',
+        board: []
       },
+      gameBoard: ['', '', '', '', '', '', '', '', ''],
+      currentPlayer: 'player1',
+      winner: ''
     };
   }
 
   handleSelected = (event) => {
     const id = event.target.id;
-    // console.log('Selected!', id);
+    const currentPlayer = this.state.currentPlayer;
+    let nextCurrentPlayer;
+    let char;
 
-    const copyBoard = [...this.state.player1.board];
+    const copyBoard = [...this.state[currentPlayer].board];
     copyBoard.push(parseInt(id));
 
-    this.setState({
-      player1: {
-        ...this.state.player1,
-        board: copyBoard
-      }
-    });
-    console.log(this.state.player1);
+    let copyGameBoard = [...this.state.gameBoard];
 
-    console.log('board length: ', this.state.player1.board.length)
-    if (this.state.player1.board.length > 2) {
+    char = currentPlayer === 'player1' ? 'O' : 'X';
+    copyGameBoard[id] = char;
+
+    nextCurrentPlayer = this.state.currentPlayer === 'player1' ? 'player2' : 'player1';
+
+    this.setState({
+      [currentPlayer]: {
+        ...this.state[currentPlayer],
+        board: copyBoard
+      },
+      gameBoard: copyGameBoard,
+      currentPlayer: nextCurrentPlayer
+    });
+
+    if (this.state[currentPlayer].board.length >= 2) {
       this.checkIfWon();
     }
   }
 
   checkIfWon = () => {
-    console.log('triggered')
-    let copyBoard = [...this.state.player1.board];
-    copyBoard = copyBoard.sort(function(a, b) {
+    const currentPlayer = this.state.currentPlayer;
+    let playerBoard = [...this.state[currentPlayer].board];
+    playerBoard = playerBoard.sort(function(a, b) {
       return a - b;
     });
-    console.log(copyBoard);
-    var win = [1, 2, 3];
+    console.log("sorted player board", playerBoard);
+    var possibleWins = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8]
+    ];
 
+    var isMatch = false;
+    var win = false;
+
+    for (var i = 0; i < possibleWins.length; i++) {
+      var currArr = possibleWins[i]
+      if (isMatch) {
+        win = true;
+        break;
+      }
+      for (var j = 0; j < playerBoard.length; j++) {
+        if (currArr[j] === playerBoard[j]) {
+          isMatch = true;  
+        } else {
+          isMatch = false;
+          break;
+        }
+      }
+    }
+
+    if (win) {
+      this.setState({ winner: currentPlayer });
+    }
   }
 
   render() {
+    var boardText = this.state.gameBoard.map(function (square) {
+      return (
+        <p>{square}</p>
+      );
+    })
     return (
       <div className="App">
         <Board 
           className="board" 
-          handleSelected={this.handleSelected} />
+          handleSelected={this.handleSelected} text={boardText} />
       </div>
     );
   }
