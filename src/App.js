@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Board from './components/Board';
+import Form from './components/Form';
+import Winner from './components/Winner';
 import { checkIfWon } from './helpers';
 import './App.css';
 
@@ -9,11 +11,11 @@ class App extends Component {
 
     this.state = {
       player1: {
-        name: 'Player 1',
+        name: '',
         board: []
       },
       player2: {
-        name2: 'Player 2',
+        name: '',
         board: []
       },
       gameBoard: ['', '', '', '', '', '', '', '', ''],
@@ -25,7 +27,9 @@ class App extends Component {
   handleSelected = (event) => {
     const id = event.target.id;
     const currentPlayer = this.state.currentPlayer;
+    // Makes a copy of the player's board
     const playerBoard = [...this.state[currentPlayer].board];
+    // Makes a copy of the master game board
     let gameBoard = [...this.state.gameBoard];
     let nextCurrentPlayer;
     let char;
@@ -59,12 +63,34 @@ class App extends Component {
     }
   }
 
+  handleInputChange = (event) => {
+    let player;
+    player = event.target.name === 'player1' ? 'player1' : 'player2';
+    this.setState({
+      [event.target.name]: {
+        name: event.target.value,
+        board: this.state[player].board
+      }
+    });
+  }
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+  }
+
   render() {
     return (
-      <div className="App">
+      <div>
+        <Form 
+          player1={this.state.player1}
+          player2={this.state.player2}
+          handleInputChange={this.handleInputChange} 
+          handleFormSubmit={this.handleFormSubmit} />
+        <Winner />
         <Board 
           className="board" 
-          handleSelected={this.handleSelected} board={this.state.gameBoard} />
+          handleSelected={this.handleSelected} 
+          board={this.state.gameBoard} />
       </div>
     );
   }
