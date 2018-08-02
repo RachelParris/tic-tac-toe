@@ -1,3 +1,18 @@
+body, html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  height: 100%;
+  width: 70%;
+}
+
 .board {
   text-align: center;
 }
@@ -5,6 +20,8 @@
 .square {
   border: 2px solid #000;
   display: inline-block;
-  height: 300px;
-  width: 300px;
-}
+  height: 33%;
+  width: 33%;
+  min-width: 200px;
+  min-height: 200px;
+} 

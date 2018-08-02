@@ -5,13 +5,13 @@ class Board extends Component {
 
     var board = this.props.board.map((square, index) => {
       return (
-        <div
+        <span
           key={index}
           id={index}
           className="square"
           onClick={this.props.handleSelected}>
           {square}
-        </div>
+        </span>
       )
     });
 

@@ -10,15 +10,15 @@ class App extends Component {
     super(props);
 
     this.state = {
-      player1: {
+      'player1': {
         name: '',
         board: []
       },
-      player2: {
+      'player2': {
         name: '',
         board: []
       },
-      gameBoard: ['', '', '', '', '', '', '', '', ''],
+      'gameBoard': ['', '', '', '', '', '', '', '', ''],
       currentPlayer: 'player1',
       winner: ''
     };
@@ -34,6 +34,7 @@ class App extends Component {
     let nextCurrentPlayer;
     let char;
 
+    // TODO player should not be able to select an already selected square
     // Adds the selected square index num to the current player's board array
     playerBoard.push(parseInt(id));
 
@@ -42,7 +43,7 @@ class App extends Component {
     gameBoard[id] = char;
 
     // Switches to the next player
-    nextCurrentPlayer = this.state.currentPlayer === 'player1' ? 'player2' : 'player1';
+    nextCurrentPlayer = this.state.currentPlayer === 'player1' ? 'player2': 'player1';
 
     // Updates state
     this.setState({
