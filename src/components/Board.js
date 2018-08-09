@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import './board.css';
 class Board extends Component {
   render () {
 
@@ -8,7 +9,7 @@ class Board extends Component {
         <span
           key={index}
           id={index}
-          className="square"
+          className={"square s" + index}
           onClick={this.props.handleSelected}>
           {square}
         </span>
@@ -16,7 +17,7 @@ class Board extends Component {
     });
 
     return (
-      <div className="wrapper">
+      <div className="board">
         {board}
       </div>
     );

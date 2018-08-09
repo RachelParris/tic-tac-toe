@@ -1,0 +1,46 @@
+:root {
+  --border: #f00;
+}
+
+.board {
+  /* border: 3px dashed green; */
+  display: flex;
+  flex-flow: row wrap;
+  height: 100%;
+  width: 70%;
+  text-align: center;
+}
+
+.square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 33%;
+  width: 33%;
+  min-width: 100px;
+  min-height: 100px;
+} 
+
+.s0, .s1, .s2, .s3, .s5 {
+  border-bottom: 1px solid var(--border);
+}
+
+.s6, .s7, .s8 {
+  border-top: 1px solid var(--border);
+}
+
+.s0, .s3, .s6 {
+  border-right: 1px solid var(--border);
+}
+
+.s2, .s5, .s8 {
+  border-left: 1px solid var(--border);
+}
+
+.s3, .s5 {
+  border-top: 1px solid var(--border);
+}
+
+.s4 {
+  border: 1px solid var(--border);
+}

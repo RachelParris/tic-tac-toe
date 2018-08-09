@@ -6,22 +6,22 @@ body, html {
   width: 100%;
 }
 
-.wrapper {
+.center {
+  /* border: 2px solid red; */
   display: flex;
-  flex-flow: row wrap;
-  height: 100%;
-  width: 70%;
+  justify-content: center;
+  align-items: center;
 }
 
-.board {
-  text-align: center;
+.column {
+  flex-flow: column;
 }
 
-.square {
-  border: 2px solid #000;
-  display: inline-block;
-  height: 33%;
-  width: 33%;
-  min-width: 200px;
-  min-height: 200px;
-} 
+.row {
+    flex-flow: row;
+}
+
+.player-img {
+  height: 100px;
+  width: auto;
+}

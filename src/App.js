@@ -3,6 +3,8 @@ import Board from './components/Board';
 import Form from './components/Form';
 import Winner from './components/Winner';
 import { checkIfWon } from './helpers';
+import blackPantherImg from './images/blackpanther.jpg';
+import clawImg from './images/claw.jpg';
 import './App.css';
 
 class App extends Component {
@@ -10,17 +12,18 @@ class App extends Component {
     super(props);
 
     this.state = {
-      'player1': {
+      player1: {
+        name: '',
+        board: []
+      }, 
+      player2: {
         name: '',
         board: []
       },
-      'player2': {
-        name: '',
-        board: []
-      },
-      'gameBoard': ['', '', '', '', '', '', '', '', ''],
+      gameBoard: ['', '', '', '', '', '', '', '', ''],
       currentPlayer: 'player1',
-      winner: ''
+      winner: '',
+      showForm: true
     };
   }
 
@@ -34,33 +37,42 @@ class App extends Component {
     let nextCurrentPlayer;
     let char;
 
-    // TODO player should not be able to select an already selected square
-    // Adds the selected square index num to the current player's board array
-    playerBoard.push(parseInt(id));
+    
 
-    // Adds an 'X' or 'O' to the selected square index based on the current player
-    char = currentPlayer === 'player1' ? 'O' : 'X';
-    gameBoard[id] = char;
+    if (this.state.player1.name !== '' && this.state.player2.name !== '') {
 
-    // Switches to the next player
-    nextCurrentPlayer = this.state.currentPlayer === 'player1' ? 'player2': 'player1';
-
-    // Updates state
-    this.setState({
-      [currentPlayer]: {
-        ...this.state[currentPlayer],
-        board: playerBoard
-      },
-      gameBoard: gameBoard,
-      currentPlayer: nextCurrentPlayer
-    });
-
+      if (gameBoard[id] === '') {
+        // Adds the selected square index num to the current player's board array
+      playerBoard.push(parseInt(id));
+  
+      // Adds an 'X' or 'O' to the selected square index based on the current player
+      char = currentPlayer === 'player1' ? blackPantherImg : clawImg;
+      char = <img class="player-img" src={char} alt={char} />;
+      gameBoard[id] = char;
+  
+      // Switches to the next player
+      nextCurrentPlayer = this.state.currentPlayer === 'player1' ? 'player2' : 'player1';
+  
+      // Updates state
+      this.setState({
+        [currentPlayer]: {
+          ...this.state[currentPlayer],
+          board: playerBoard
+        },
+        gameBoard: gameBoard,
+        currentPlayer: nextCurrentPlayer
+      });
+      }
+      
+    }
+    
     // Checks who won after a player has made 3 selections
     if (this.state[currentPlayer].board.length >= 2) {
-      let isWon = checkIfWon(currentPlayer, playerBoard);
+      let isWon = checkIfWon(playerBoard);
 
       // Updates which player won by name
       let winner = isWon ? this.state[currentPlayer].name : '';
+      console.log(winner)
       this.setState({ winner });
     }
   }
@@ -78,20 +90,22 @@ class App extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    // TODO Clear input fields
+    
+    this.setState({
+      showForm: false
+    });
   }
 
   render() {
     return (
-      <div>
-        <Form 
+      <div className="center column">
+        {this.state.showForm ? <Form 
           player1={this.state.player1}
           player2={this.state.player2}
           handleInputChange={this.handleInputChange} 
-          handleFormSubmit={this.handleFormSubmit} />
+          handleFormSubmit={this.handleFormSubmit} /> : ''}
         {this.state.winner ? <Winner winner={this.state.winner} /> : ''}
         <Board 
-          className="board" 
           handleSelected={this.handleSelected} 
           board={this.state.gameBoard} />
       </div>

@@ -5,10 +5,12 @@ const possibleWins = [
   [0, 3, 6],
   [1, 4, 7],
   [0, 4, 8],
-  [6, 7, 2]
+  [6, 7, 2],
+  [2, 5, 8]
 ];
 
-const checkIfWon = (currentPlayer, playerBoard) => {
+const checkIfWon = (playerBoard) => {
+  playerBoard.sort((a, b) => a - b);
   let isMatch = false;
   let win = false;
 

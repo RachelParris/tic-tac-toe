@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-
+import '../App.css';
+import './form.css';
 
 class Form extends Component {
   render () {
     return (
-      <form onSubmit={this.props.handleFormSubmit}>
+      <form className="center" onSubmit={this.props.handleFormSubmit}>
         <input 
           type="text" 
           name="player1" 
