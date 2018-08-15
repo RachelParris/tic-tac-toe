@@ -13,14 +13,12 @@ class App extends Component {
 
     this.state = {
       player1: {
-        name: '',
-        board: []
+        name: ''
       }, 
       player2: {
-        name: '',
-        board: []
+        name: ''
       },
-      gameBoard: ['', '', '', '', '', '', '', '', ''],
+      board: ['', '', '', '', '', '', '', '', ''],
       currentPlayer: 'player1',
       winner: '',
       showForm: true
@@ -30,25 +28,23 @@ class App extends Component {
   handleSelected = (event) => {
     const id = event.target.id;
     const currentPlayer = this.state.currentPlayer;
-    // Makes a copy of the player's board
-    const playerBoard = [...this.state[currentPlayer].board];
+
     // Makes a copy of the master game board
-    let gameBoard = [...this.state.gameBoard];
+    let board = [...this.state.board];
     let nextCurrentPlayer;
     let char;
 
-    
-
     if (this.state.player1.name !== '' && this.state.player2.name !== '') {
 
-      if (gameBoard[id] === '') {
+      if (board[id] === '') {
         // Adds the selected square index num to the current player's board array
-      playerBoard.push(parseInt(id));
-  
+      board.push(currentPlayer);
+      
+      // TODO move logic to Board component
       // Adds an 'X' or 'O' to the selected square index based on the current player
-      char = currentPlayer === 'player1' ? blackPantherImg : clawImg;
-      char = <img class="player-img" src={char} alt={char} />;
-      gameBoard[id] = char;
+      // char = currentPlayer === 'player1' ? blackPantherImg : clawImg;
+      // char = <img class="player-img" src={char} alt={char} />;
+      // board[id] = char;
   
       // Switches to the next player
       nextCurrentPlayer = this.state.currentPlayer === 'player1' ? 'player2' : 'player1';
@@ -57,9 +53,8 @@ class App extends Component {
       this.setState({
         [currentPlayer]: {
           ...this.state[currentPlayer],
-          board: playerBoard
         },
-        gameBoard: gameBoard,
+        board: board,
         currentPlayer: nextCurrentPlayer
       });
       }
@@ -67,8 +62,8 @@ class App extends Component {
     }
     
     // Checks who won after a player has made 3 selections
-    if (this.state[currentPlayer].board.length >= 2) {
-      let isWon = checkIfWon(playerBoard);
+    if (this.state.board.length >= 2) {
+      let isWon = checkIfWon(board);
 
       // Updates which player won by name
       let winner = isWon ? this.state[currentPlayer].name : '';
@@ -107,7 +102,7 @@ class App extends Component {
         {this.state.winner ? <Winner winner={this.state.winner} /> : ''}
         <Board 
           handleSelected={this.handleSelected} 
-          board={this.state.gameBoard} />
+          board={this.state.board} />
       </div>
     );
   }
