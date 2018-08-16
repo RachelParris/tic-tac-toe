@@ -1,38 +1,44 @@
-const possibleWins = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [0, 4, 8],
-  [6, 7, 2],
-  [2, 5, 8]
-];
+/**
+ * ROWS         COLUMNS     DIAGNOLS
+ * [0, 1, 2]    [0, 3, 6]   [0, 4, 8]
+ * [3, 4, 5]    [1, 4, 7]   [2, 4, 6]
+ * [6, 7, 8]    [2, 5, 8]
+*/
 
-const checkIfWon = (playerBoard) => {
-  playerBoard.sort((a, b) => a - b);
-  let isMatch = false;
-  let win = false;
+const checkRows = (board) => {
+  const rows = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8]
+  ];
+  let char;
 
-  for (let i = 0; i < possibleWins.length; i++) {
-    let currBoard = possibleWins[i];
-
-    if (isMatch) {
-      win = true;
-      break;
-    }
-
-    for (let j = 0; j < playerBoard.length; j++) {
-      if (currBoard[j] === playerBoard[j]) {
-        isMatch = true;  
-      } else {
-        isMatch = false;
-        break;
+  loop1: for(var i = 0; i < rows.length; i++) {
+    char = 'X';
+    let char2;
+    let win = false;
+    loop2: for(var j = 0; j < board.length; i += 2) {
+      if (board[j] !== char) {
+        break loop1;
+      } else if (char2 === board[j]) {
+        
       }
     }
   }
+};
+let checkColumns;
 
-  return win;
+const checkIfWon = (board) => {
+  checkRows(board);
+  // console.log(board);
+  // Check diagnols
+  const x = 'X';
+  const o = 'O';
+  // if ((board[0] === board[4] && board[0] === board[8]) || (board[2] === board[4] && board[2] === board[6]) ) {
+  //   console.log('they all match!')
+  // }
 }
+
+
 
 export { checkIfWon }; 
