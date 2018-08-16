@@ -4,41 +4,29 @@
  * [3, 4, 5]    [1, 4, 7]   [2, 4, 6]
  * [6, 7, 8]    [2, 5, 8]
 */
-
-const checkRows = (board) => {
-  const rows = [
+const checkIfWon = (board, player) => {
+  let char = player === 'player1' ? 'X' : 'O';
+  const wins = [
     [0, 1, 2],
     [3, 4, 5],
-    [6, 7, 8]
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
   ];
-  let char;
 
-  loop1: for(var i = 0; i < rows.length; i++) {
-    char = 'X';
-    let char2;
-    let win = false;
-    loop2: for(var j = 0; j < board.length; i += 2) {
-      if (board[j] !== char) {
-        break loop1;
-      } else if (char2 === board[j]) {
-        
-      }
+  let playerWin = false;
+  for(var i = 0; i < wins.length; i++) {
+    var index = wins[i] // [0, 1, 2];
+
+    if (board[index[0]] === char && board[index[1]] === char && board[index[2]] === char) {
+      playerWin = true;
+      break;
     }
   }
-};
-let checkColumns;
-
-const checkIfWon = (board) => {
-  checkRows(board);
-  // console.log(board);
-  // Check diagnols
-  const x = 'X';
-  const o = 'O';
-  // if ((board[0] === board[4] && board[0] === board[8]) || (board[2] === board[4] && board[2] === board[6]) ) {
-  //   console.log('they all match!')
-  // }
+  console.log(playerWin)
 }
-
-
 
 export { checkIfWon }; 

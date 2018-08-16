@@ -38,7 +38,7 @@ class App extends Component {
 
       if (board[id] === '') {
         // Adds an 'X' or 'O' to the selected square index based on the current player
-        char = currentPlayer === 'player1' ? 'X' : 'o';
+        char = currentPlayer === 'player1' ? 'X' : 'O';
         board[id] = char;
     
         // Switches to the next player
@@ -58,12 +58,12 @@ class App extends Component {
     }
     
     // Checks who won after a player has made 3 selections
-    let isWon = checkIfWon(board);
+    let isWon = checkIfWon(board, currentPlayer);
 
     // Updates which player won by name
-    // let winner = isWon ? this.state[currentPlayer].name : '';
-    // console.log(winner)
-    // this.setState({ winner });
+    let winner = isWon ? this.state[currentPlayer].name : '';
+    console.log(winner)
+    this.setState({ winner });
   }
 
   handleInputChange = (event) => {
