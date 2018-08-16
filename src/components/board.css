@@ -1,7 +1,3 @@
-:root {
-  --border: #f00;
-}
-
 .board {
   /* border: 3px dashed green; */
   display: flex;
@@ -17,30 +13,39 @@
   justify-content: center;
   height: 33%;
   width: 33%;
-  min-width: 100px;
-  min-height: 100px;
 } 
 
 .s0, .s1, .s2, .s3, .s5 {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 3px solid var(--border);
 }
 
 .s6, .s7, .s8 {
-  border-top: 1px solid var(--border);
+  border-top: 3px solid var(--border);
 }
 
 .s0, .s3, .s6 {
-  border-right: 1px solid var(--border);
+  border-right: 3px solid var(--border);
 }
 
 .s2, .s5, .s8 {
-  border-left: 1px solid var(--border);
+  border-left: 3px solid var(--border);
 }
 
+
 .s3, .s5 {
-  border-top: 1px solid var(--border);
+  border-top: 3px solid var(--border);
 }
 
 .s4 {
-  border: 1px solid var(--border);
+  border: 3px solid var(--border);
+}
+
+.s1 {
+  border-left: 3px solid var(--border);
+  border-right: 3px solid var(--border);
+}
+
+.s7 {
+  border-left: 3px solid var(--border);
+  border-right: 3px solid var(--border);
 }

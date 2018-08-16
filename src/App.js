@@ -46,10 +46,6 @@ class App extends Component {
     
         // Updates state
         this.setState({
-          // [currentPlayer]: {
-          //   ...this.state[currentPlayer],
-          //   board: playerBoard
-          // },
           board,
           currentPlayer: nextCurrentPlayer
         });
@@ -62,7 +58,7 @@ class App extends Component {
 
     // Updates which player won by name
     let winner = isWon ? this.state[currentPlayer].name : '';
-    console.log(winner)
+
     this.setState({ winner });
   }
 
