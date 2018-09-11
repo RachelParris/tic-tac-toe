@@ -17,8 +17,15 @@ class Board extends Component {
     });
 
     return (
-      <div className="board">
-        {board}
+      <div className="container">
+        <header>
+            <div>{this.props.player1}</div>
+            {this.props.winner ? <div>Winner: {this.props.winner}</div> : ''}
+            <div>{this.props.player2}</div>
+        </header>
+        <div className="board">
+          {board}
+        </div>
       </div>
     );
   }

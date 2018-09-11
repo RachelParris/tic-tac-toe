@@ -92,8 +92,11 @@ class App extends Component {
               handleInputChange={this.handleInputChange} 
               handleFormSubmit={this.handleFormSubmit} /> : 
             <Board
-              handleSelected={this.handleSelected} 
-              board={this.state.board} />
+              board={this.state.board}
+              player1={this.state.player1.name}
+              player2={this.state.player2.name}
+              winner={this.state.winner}
+              handleSelected={this.handleSelected} />
         }
       </div>
     );

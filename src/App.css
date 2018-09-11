@@ -1,6 +1,6 @@
 :root {
   --bg: #a05ac5;
-  --border:#463864;
+  --darkpurple:#463864;
 }
 
 body, html, div {
@@ -15,11 +15,37 @@ body {
   background-color: var(--bg);
 }
 
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+header > div {
+  background-color: var(--darkpurple);
+  color: #fff;
+  border: 1px solid var(--darkpurple);
+  border-radius: 25px;
+  font-weight: 900;
+  text-transform: uppercase;
+  width: 250px;
+  margin: 10px 0;
+  padding: 20px;
+}
+
 span {
   /* box-sizing: border-box; */
   margin: 0;
   padding: 0;
   font-size: 4.25rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .center {
