@@ -84,15 +84,17 @@ class App extends Component {
   render() {
     return (
       <div className="center column">
-        {this.state.showForm ? <Form 
-          player1={this.state.player1}
-          player2={this.state.player2}
-          handleInputChange={this.handleInputChange} 
-          handleFormSubmit={this.handleFormSubmit} /> : ''}
-        {this.state.winner ? <Winner winner={this.state.winner} /> : ''}
-        <Board 
-          handleSelected={this.handleSelected} 
-          board={this.state.board} />
+        {
+          this.state.showForm ? 
+            <Form 
+              player1={this.state.player1}
+              player2={this.state.player2}
+              handleInputChange={this.handleInputChange} 
+              handleFormSubmit={this.handleFormSubmit} /> : 
+            <Board
+              handleSelected={this.handleSelected} 
+              board={this.state.board} />
+        }
       </div>
     );
   }
